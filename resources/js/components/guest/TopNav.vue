@@ -83,14 +83,14 @@ const academics = computed(() => store.getters['guest/getDropdownLinksAcademics'
 } .nav .item:focus, .nav .item:visited {
   color: #996515;
 } .nav .link {
-  font-weight: bolder;
+  font-weight: 600;
   font-size: 15px;
   color: #373D3F;
   border-radius: 8px;
   transition: all ease .1s;
 } .nav .link:hover {
   color: var(--app-light-brown); 
-  transform: scale(1.1);
+  text-decoration: underline;
 } .nav .link:focus {
   color: var(--app-light-brown);
 } .nav .active {

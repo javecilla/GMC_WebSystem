@@ -1,4 +1,6 @@
 import navbarModule from './navbar.js';
+import homeModule from './home.js';
+import footerModule from './footer.js';
 
 export default {
 	namespaced: true,
@@ -10,6 +12,8 @@ export default {
 	mutations: {},
 	action: {},
 	modules: {
-		navbar: navbarModule
+		navbar: navbarModule,
+		home: homeModule,
+		footer: footerModule,
 	}
 }

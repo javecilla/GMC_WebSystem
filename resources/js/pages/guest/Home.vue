@@ -1,3 +1,14 @@
+<script setup>
+import { useStore, mapGetters } from 'vuex';
+import { computed, defineAsyncComponent} from 'vue';
+
+const store = useStore();
+const offers = computed(() => store.getters['guest/home/getOffers']);
+
+const WaveLine = defineAsyncComponent(() => 
+  import('@/components/WaveLine.vue')
+);
+</script>
 <template>
 	<section class="hero bg-grid">
 		<div class="text-center container content">
@@ -5,10 +16,10 @@
 				<label class="sub-title gradient-brown-text">
 					Senior High School
 				</label>
-		    <h1 class="main-title gradient-brown-text">
+		    <h1 class="main-title gradient-brown-text col-lg-11 mx-auto">
 		    	Applications for the Academic Year 2024-2025 are now open.
 				</h1>
-				<p class="description">
+				<p class="description col-lg-10 mx-auto">
 					Seize your future! Enroll now at GMC Senior High. Dream big, aim higher. New students and transferees are welcome at all levels. Your journey starts here!
 				</p>
 			</div>
@@ -24,9 +35,231 @@
 	    </div>
 	 	</div>
   </section>
-</template>
 
-<style>
+  <section class="stats">
+    <div class="container">
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="row gap-3">
+          <div class="col-auto">
+            <span class="data">
+              <i class="fa-solid fa-eye icon"></i>
+              <span class="text">Views: 0</span>
+            </span>
+          </div>
+          <div class="col-auto">
+            <span class="data">
+              <i class="fa-solid fa-graduation-cap icon"></i>
+              <span class="text">Students: 0</span>
+            </span>
+          </div>
+          <div class="col-auto">
+            <span class="data">
+              <i class="fa-solid fa-school icon"></i>
+              <span class="text">Campus: 0</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <WaveLine stroke="top" color="#F8FAFC" className="svg-between-stats-market" 
+    inlineStyle="margin-top: -130px!important;"/>
+
+  <section class="market">
+    <div class="container content">
+      <div class="d-flex justify-content-center align-items-center">
+        <img src="@assets/images/561231hero.png" loading="lazy" class="image" />
+      </div>
+    </div>
+  </section>
+
+  <WaveLine stroke="bottom" color="#F8FAFC" className="svg-between-market-strand" 
+    inlineStyle="margin-top: -110px!important;"/>
+
+  <section class="strands">
+    <div class="container">
+      <div class="content position-relative text-center text-muted bg-body">
+        <label class="gradient-brown-text label">Explore Our Senior High School Strands</label>
+        <h1 class="gradient-dark-text header col-lg-10 mx-auto">Discover Your Path to Success</h1>
+        <p class="col-lg-9 mx-auto text">
+          Choosing the right strand to prepare for college is a pivotal decision that shapes your future. At Golden Minds Colleges, we offer a diverse range of specialized strands designed to align with your unique interests and career aspirations.
+          <br/><br/>
+          Whether you're passionate about STEM and ICT subjects, inclined towards the arts, or eager to delve into business and entrepreneurship, our Senior High School program provides tailored pathways to help you thrive.
+        </p>
+        <p><a href="#" class="link">Learn more about each strand
+        <i class="fa-solid fa-arrow-right"></i></a></p>
+      </div>
+    </div>
+  </section>
+
+  <WaveLine stroke="top" color="#F8FAFC" className="svg-between-strands-offers" 
+    inlineStyle="margin-top: -190px!important;"/>
+
+  <section class="offers">
+    <div class="container">
+      <div class="content">
+        <label class="gradient-brown-text label">Why Golden Minds?</label>
+        <h1 class="gradient-dark-text header">Free Tuition Fee on<br/>your Senior High School</h1>
+        <p><a href="#" class="link">Register Now Online<i class="fa-solid fa-arrow-right"></i></a></p>
+        <div id="offersData">
+          <div class="box-group row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div v-for="(offer, i) in offers" :key="i" class="col d-flex align-items-start mt-3">
+              <div class="icon-container text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <i class="fa-solid icon" :class="offer.icon"></i>
+              </div>
+              <div>
+                <h3 class="label-text">{{ offer.label }}</h3>
+                <p class="text">{{ offer.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <WaveLine stroke="bottom" color="#F8FAFC" className="svg-between-offers-als" 
+    inlineStyle="margin-top: -120px!important;"/>
+
+  <section class="als">
+    <div class="container">
+      <div class="content position-relative text-center text-muted bg-body">
+        <label class="gradient-brown-text label">Unlock Your Potential with Golden Minds</label>
+        <h1 class="gradient-dark-text header">Welcome, ALS Graduates!</h1>
+        <p class="col-lg-9 mx-auto text">
+          At Golden Minds, we embrace diversity and believe in providing opportunities for all. If you're an ALS graduate seeking to further your education and pursue your dreams, our doors are open for you.
+          <br/><br/>
+          Experience our supportive learning environment, dedicated faculty, and enriching programs designed to help you thrive academically and personally. Join us and continue your journey towards success.
+        </p>
+        <p><a href="#" class="link">Learn How to Enroll
+        <i class="fa-solid fa-arrow-right"></i></a></p>
+      </div>
+    </div>
+  </section>
+
+ 
+  <WaveLine stroke="top" color="#493026" className="svg-between-als-benifits" 
+    inlineStyle="margin-top: -190px!important;"/>
+
+  <section class="benifits">
+    <div class="container">
+      <div class="content">
+        <h2 class="gradient-golden-text label">Benefits of Enrolling at Golden Minds</h2>
+        <h1 class="header">Education for Everyone</h1>
+        <p class="text">Discover the advantages of starting your academic journey at Golden Minds Colleges.</p>
+        <div class="box-group row align-items-center g-5 py-5">
+          <div class="col-lg-4 mt-3">
+            <div class="card align-items-start">
+               <div class="d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <i class="fa-solid fa-circle-check icon"></i>
+              </div>
+              <div>
+                <h3 class="card-label">Free Education</h3>
+                <p class="text-container">
+                  <ul style="line-height: 23px!important;">
+                    <li class="card-text">Free Tuition Fee</li>
+                    <li class="card-text">Free Regular Uniform</li>
+                    <li class="card-text">Free P.E Uniform</li>
+                    <li class="card-text">Free Student ID & Lace</li>
+                    <li class="card-text">Student Incentives</li>
+                  </ul>
+                </p>
+                <p><a href="#" class="link">Learn More
+                  <i class="fa-solid fa-arrow-right"></i></a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mt-3">
+            <div class="card align-items-start">
+               <div class="d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <i class="fa-solid fa-school icon"></i>
+              </div>
+              <div>
+                <h3 class="card-label">Air-Conditioned</h3>
+                <p class="text-container">
+                  <ul>
+                    <li class="card-text" style="line-height: 26px!important;">At Golden Minds Colleges, we prioritize your comfort and learning experience by providing air-conditioned classrooms and study areas throughout our campus.</li>
+                  </ul>
+                </p>
+                <p><a href="#" class="link">Learn More
+                  <i class="fa-solid fa-arrow-right"></i></a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mt-3">
+            <div class="card align-items-start">
+              <div class="d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <i class="fa-solid fa-people-line icon"></i>
+              </div>
+              <div>
+                <h3 class="card-label">Friendly Environment</h3>
+                <p class="text-container">
+                  <ul>
+                    <li class="card-text" style="line-height: 26px!important;">
+                    Golden Minds fosters a nurturing and inclusive atmosphere that encourages personal growth and a strong community.</li>
+                  </ul>
+                </p>
+                <p><a href="#" class="link">Learn More
+                  <i class="fa-solid fa-arrow-right"></i></a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <WaveLine stroke="bottom" color="#493026" className="svg-between-benifits-info" 
+    inlineStyle="margin-top: -120px!important;"/>
+
+  <section class="info">
+    <div class="container">
+      <div class="content" >
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+            <img src="@assets/images/51asfinf0.png" class="d-block mx-lg-auto img-fluid image" 
+              alt="img" width="700" height="550" loading="lazy"/>
+          </div>
+          <div class="col-lg-6">
+            <label class="gradient-brown-text label">What's Golden Minds Colleges?</label>
+            <h1 class="gradient-dark-text header">About Us</h1>
+            <p class="text">
+              Is a distinguished private school providing tuition-free education. Our institution is committed to nurturing graduates who excel in the ever-evolving global landscape. Aim to produces graduates that are competitive in the current global trends. Develop young minds to become God-fearing, intelligent and multitask individuals.
+            </p>
+            <p><a href="#" class="link">Why students love Golden Minds
+            <i class="fa-solid fa-arrow-right"></i></a></p>
+            <p><a href="#" class="link">Navigate to our Gallery from Event Campus
+            <i class="fa-solid fa-arrow-right"></i></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <WaveLine stroke="bottom" color="#F8FAFC" className="svg-between-info-experience" 
+    inlineStyle="margin-top: -60px!important;"/>
+
+  <section class="experience">
+    <div class="container">
+      <div class="content position-relative text-center text-muted">
+        <label class="gradient-brown-text label">Golden Minds Colleges Experience</label>
+        <h1 class="gradient-dark-text header">14 Years of <br/>Educational Excellence</h1>
+        <p class="col-lg-10 mx-auto text">
+          Experience the comforts of a home-away-from-home at Golden Minds Colleges, a Bulacan-based private institution offering tuition-free education across three campuses in Sta. Maria, Balagtas, and Guiguinto. Our cutting-edge academic programs are driven by a commitment to research and innovation, ensuring a leading-edge educational experience.
+        </p>
+        <p><a href="#" class="link">Read More
+        <i class="fa-solid fa-arrow-right"></i></a></p>
+      </div>
+    </div>
+  </section>
+
+  
+  <WaveLine stroke="top" color="#F5FAFE" className="svg-between-benifits-info" 
+    inlineStyle="margin-top: -180px!important;"/>
+</template>
+<style scoped>
 /*Hero*/
 .hero {
   padding-top: 20px;
@@ -129,13 +362,13 @@
 }
 /*END Stats*/
 .svg-between-stats-market {
-  margin-top: -140px;
+  margin-top: -150px!important;
 }
 
 /*Market*/
 .market {
   pointer-events: none;
-  background: #F5FAF1;
+  background: #f8f9fa;
   padding: 10px 0px 10px 0px; /*left right top bottom*/
 } .market .content {
 
@@ -145,52 +378,54 @@
   height: 500px;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, .5);
   filter: drop-shadow(0 0 0.60rem rgba(0, 0, 0, .2));
-  margin-top: -75px;
+  margin-top: -100px!important;
 }
 /*END Market*/
-.svg-between-market-info {
-  margin-top: -60px;
+.svg-between-market-strands {
+  margin-top: -110px;
 }
 
-/*Info*/
-.info {
-  margin-top: -140px;
-  padding: 10px 0px 10px 0px; /*left right top bottom*/
-} .info .content {
-   padding: 35px 35px 35px 5px;;
-} .info .label {
+/*strands*/
+.strands {
+  margin-top: -100px!important; 
+  padding: 30px 0px 10px 0px;
+} .strands .content {
+  background: #fff!important;
+} .strands .label {
   font-family: var(--app-font-roboto);
   font-size: 25px;
   font-weight: 600;
-} .info .header {
+} .strands .header {
   font-family: var(--app-font-poppins);
   font-size: 60px;
-} .info .text {
+  margin-bottom: 20px;
+} .strands .text {
   font-family: var(--app-font-roboto);
   font-size: 18px;
-} .info .link {
+  color: #212529BF;
+} .strands .link {
   font-family: var(--app-font-roboto);
   font-size: 18px;
   font-weight: bold;
   color: var(--app-light-brown);
   text-decoration: none;
   transition: all ease .3s;
-} .info .link:hover {
+} .strands .link:hover {
   text-decoration: underline;
   font-weight: bolder;
   color: var(--app-dark-brown);
+} 
+.svg-between-strands-offers {
+  margin-top: -190px!important;
 }
-/*End Info*/
-.svg-between-info-offers {
-  margin-top: -160px;
-}
-/*Offers*/
+
+/* Offers*/
 .offers {
   cursor: default;
-  background: #F5FAF1;
+  background: #F8FAFC;
   padding: 10px 0px 10px 0px;
 } .offers .content {
-  margin-top: 15px;
+  margin-top: -15px;
 } .offers .label {
   font-family: var(--app-font-roboto);
   font-size: 25px;
@@ -220,7 +455,7 @@
   color: #f1f1f1;
 } .offers .label-text {
   font-family: var(--app-font-roboto);
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 600;
   color: #212529BF;
 } .offers .label-text:hover {
@@ -228,58 +463,51 @@
   opacity: .7;
 } .offers .text {
   font-family: var(--app-font-roboto);
-  font-size: 18px;
-  color: #212529BF;
+  font-size: 17.3px;
+  opacity: .8;
 } .offers .box-group {
   margin-top: -55px;
 }
-/*End Offers*/
-.svg-between-offers-strand {
-  margin-top: -75px;
+/* End Offers*/
+.svg-between-offers-als {
+  margin-top: -120px!important;
 }
-/*Strand*/
-.strand {
-  padding: 10px 0px 10px 0px;
-  margin-top: -160px;
-} .strand .content {
-
-} .strand .image {
-  width: 530px;
-  height: 310px;
-  pointer-events: none;
-
-  margin-left: -23px;
-} .strand .label {
+/*als*/
+.als {
+  margin-top: -100px!important; 
+  padding: 30px 0px 10px 0px;
+} .als .content {
+  background: #fff!important;
+} .als .label {
   font-family: var(--app-font-roboto);
   font-size: 25px;
   font-weight: 600;
-} .strand .header {
+} .als .header {
   font-family: var(--app-font-poppins);
   font-size: 60px;
   margin-bottom: 20px;
-} .strand .text {
+} .als .text {
   font-family: var(--app-font-roboto);
   font-size: 18px;
   color: #212529BF;
-  word-wrap: break-word;
-} .strand .link {
+} .als .link {
   font-family: var(--app-font-roboto);
   font-size: 18px;
   font-weight: bold;
   color: var(--app-light-brown);
   text-decoration: none;
   transition: all ease .3s;
-} .strand .link:hover {
+} .als .link:hover {
   text-decoration: underline;
   font-weight: bolder;
   color: var(--app-dark-brown);
-}
-/*END Strand*/
-.svg-between-strand-benifits {
-  margin-top: -170px;
+} 
+/*End als*/
+.svg-between-als-benifits {
+  margin-top: -190px!important;
 }
 
-/*Benifits*/
+/* Benifits*/
 .benifits {
   background: #493026;
   padding: 10px 0px 10px 0px; /*left right top bottom*/
@@ -296,7 +524,7 @@
   margin-top: -5px;
 } .benifits .text {
   font-family: var(--app-font-roboto);
-  font-size: 18px;
+  font-size: 20px!important;
   color: #f3f3f3;
 } .benifits .card {
   height: 350px;
@@ -310,14 +538,14 @@
 } .benifits .icon {
   color: #dcb336;
   margin-bottom: 10px;
-} .benifits .label-text {
+} .benifits .card-label {
   font-family: var(--app-font-roboto);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   color: #f3f3f3;
-} .benifits .text {
+} .benifits .card-text {
   font-family: var(--app-font-roboto);
-  font-size: 18px;
+  font-size: 17.2px;
   color: #f3f3f3;
   margin-top: 10px;
 } .benifits .link {
@@ -332,15 +560,46 @@
   font-weight: bolder;
   color: var(--app-light-brown);
 } 
-/*END Benifits*/
-.svg-between-benifits-experience {
-  margin-top: -30px;
-}
+/* End Benifits*/
 
-/*Experience*/
+/*Info*/
+.info {
+  background: #f8f9fa!important;
+  margin-top: -180px;
+  padding-top: 50px!important;
+} .info .content {
+  
+} .info .image {
+  pointer-events: none;
+} .info .label {
+  font-family: var(--app-font-roboto);
+  font-size: 25px;
+  font-weight: 600;
+} .info .header {
+  font-family: var(--app-font-poppins);
+  font-size: 60px;
+  margin-bottom: 20px;
+} .info .text {
+  font-family: var(--app-font-roboto);
+  font-size: 18px;
+  color: #212529BF;
+} .info .link {
+  font-family: var(--app-font-roboto);
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--app-light-brown);
+  text-decoration: none;
+  transition: all ease .3s;
+} .info .link:hover {
+  text-decoration: underline;
+  font-weight: bolder;
+  color: var(--app-dark-brown);
+}
+/*End Info*/
+
+/*Exeperience*/
 .experience {
-  margin-top: -170px; 
-  padding: 10px 0px 10px 0px;
+  margin-top: -90px;
 } .experience .content {
 
 } .experience .label {
@@ -366,5 +625,6 @@
   text-decoration: underline;
   font-weight: bolder;
   color: var(--app-dark-brown);
-} 
+}
+/*End Exeperience*/
 </style>
