@@ -2,12 +2,16 @@
 import * as yup from 'yup';
 import { useForm } from 'vee-validate';
 import { useRouter } from 'vue-router';
-import useLogin from '@/composables/auth/login';
+import { useStore } from 'vuex';
+import { useToast } from 'vue-toast-notification';
+import useAuth from '@/composables/auth/user';
 import useHelpers from '@/composables/helper';
 
-const router = useRouter();
-const { sendLoginRequest } = useLogin();
+const { login, logout } = useAuth();
 const { setError } = useHelpers();
+const router = useRouter();
+const store = useStore();
+const toast = useToast();
 
 const { handleSubmit, defineField, isSubmitting, resetForm, errors } = useForm({
   validationSchema: yup.object({
@@ -16,12 +20,19 @@ const { handleSubmit, defineField, isSubmitting, resetForm, errors } = useForm({
   }),
 });
 
-const onSubmit = handleSubmit.withControlled(async values => {
-  const res = await sendLoginRequest(values);
-  resetForm();
-  console.log(res);
-});
+const onLogin = handleSubmit.withControlled(async values => {
+  try {
+    const res = await login(values);
+    toast.open({ message: res, type: 'success' });
 
+    store.dispatch('auth/user/setAuth', true);
+  } catch (err) {
+    toast.open({ message: err, type: 'error' });
+    return; 
+  }
+
+  router.push({ name: 'admin.dashboard' });
+});
 const [email, emailAttrs] = defineField('email');
 const [password, passwordAttrs] = defineField('password');
 </script>
@@ -29,7 +40,7 @@ const [password, passwordAttrs] = defineField('password');
 <template>
 	<section class="bg-dot login-content">
 		<div class="form-login">
-			<form @submit="onSubmit">
+			<form @submit="onLogin">
 	    	<p class="note">This system is for authorized users only. If you do not have an account, please contact the system administrator to request access.</p>
 
 		    <div class="form-floating">

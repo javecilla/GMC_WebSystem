@@ -18,7 +18,7 @@ axios.interceptors.response.use(null, (error) => {
 		validation: {},
 		message: null
 	};
-
+	
 	switch (error.response.status) {
 		case 422:
 			for(let field in error.response.data.errors) {
@@ -29,7 +29,7 @@ axios.interceptors.response.use(null, (error) => {
 			errorInfo.message = 'Forbidden';
     	break;
     case 401:
-			errorInfo.message = 'Unauthorized';
+			errorInfo.message = error.response.data.message;
     	break;
     case 408:
 			errorInfo.message = 'Request Timeout';

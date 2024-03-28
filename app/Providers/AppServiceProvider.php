@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Test;
-use App\Observers\TestObserver;
+use App\Models\User;
+use App\Observers\UserObserver;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -42,6 +42,6 @@ class AppServiceProvider extends ServiceProvider {
 		JsonResource::withoutWrapping();
 
 		// Model Event Observer
-		Test::observe(TestObserver::class);
+		User::observe(UserObserver::class);
 	}
 }

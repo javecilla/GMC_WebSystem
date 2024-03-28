@@ -1,31 +1,50 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import store from '@/store/index';
 
-//guest
-import HomePageIndex from '@/pages/guest/home/HomeIndex.vue';
-//auth
-import LoginPage from '@/pages/auth/Login.vue';
-//admin
-import DashboardPageIndex from '@/pages/admin/dashboard/DashboardIndex.vue';
-
-const routes = [
-	{
-		path: '/',
-		name: 'home',
-		component: HomePageIndex
-	},
-	{
-		path: '/auth/login',
-		name: 'login',
-		component: LoginPage
-	},
-	{
-		path: '/u/dashboard',
-		name: 'admin.dashboard',
-		component: DashboardPageIndex
-	}
-];
-
-export default createRouter({
+const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
-	routes
+	routes: [
+		{
+			path: '/',
+			name: 'home',
+			component: () => import('@/pages/guest/Home.vue'),
+		},
+		{
+			path: '/auth/login',
+			name: 'login',
+			component: () => import('@/pages/guest/Login.vue'),
+			meta: {
+				requiresAuth: false
+			}
+		},
+		{
+			path: '/u/dashboard',
+			name: 'admin.dashboard',
+			component: () => import('@/pages/auth/dashboard/Index.vue'),
+			meta: {
+				requiresAuth: true
+			}
+		}
+	]
 });
+
+/**
+  * [This check if the reques routes/path is requires authenticate]
+  * redirect to home page user is not authenticated else proceed to 
+  * the requested route
+*/
+router.beforeEach(async (to, from, next) => {
+  try {
+    let isLogin = await store.dispatch('auth/user/checkAuth');
+    if (to.matched.some(record => record.meta.requiresAuth) && !isLogin) {
+			next({ name: 'home'});
+    } else {
+     	next();
+    }
+  } catch (error) {
+    next({ name: 'login'});
+  }
+});
+
+
+export default router;
