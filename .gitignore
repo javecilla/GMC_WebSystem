@@ -3,6 +3,10 @@
 /public/build
 /public/hot
 /public/storage
+/public/.vite/
+/public/css/
+/public/images/
+/public/js/
 /storage/*.key
 /vendor
 /docker
