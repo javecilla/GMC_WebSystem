@@ -1,0 +1,1 @@
+export const SET_CALENDARS = '[mutations] SET_CALENDARS';
