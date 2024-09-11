@@ -4,6 +4,8 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
 export default defineConfig({
+  base: "/",
+  publicDir: false, // Change this line
   plugins: [
     laravel({
       input: [
@@ -25,8 +27,6 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/",
-  publicDir: process.env.ASSET_URL,
   optimizeDeps: {
     include: ['v-calendar']
   },
@@ -42,22 +42,16 @@ export default defineConfig({
     chunkSizeWarningLimit: 1600,
     rollupOptions: {
       output: {
-        chunkFileNames: '[name]-[hash].js',
-        entryFileNames: '[name]-[hash].js',
-
-        assetFileNames: ({ name }) => {
-          if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
-            return '[name]-[hash][extname]'
+        manualChunks: undefined, // Add this line
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          let extType = assetInfo.name.split('.').at(1);
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            extType = 'img';
           }
-
-          if (/\.css$/.test(name ?? '')) {
-            return '[name]-[hash][extname]'
-          }
-
-          // default value
-          // ref: https://rollupjs.org/guide/en/#outputassetfilenames
-          return '[name]-[hash][extname]'
-        }
+          return `assets/${extType}/[name]-[hash][extname]`;
+        },
       }
     }
   },
