@@ -4,8 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
 export default defineConfig({
-  base: "/",
-  publicDir: false, // Change this line
+  base: '/public/',
   plugins: [
     laravel({
       input: [
@@ -14,6 +13,7 @@ export default defineConfig({
         'resources/css/app.css',
       ],
       refresh: true,
+      publicDirectory: 'public',
     }),
     vue({
       template: {
@@ -34,25 +34,30 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'resources/js'),
       '@assets': path.resolve(__dirname, 'resources/assets'),
-      vue: 'vue/dist/vue.esm-bundler.js', '~bootstrap': 'bootstrap',
+      vue: 'vue/dist/vue.esm-bundler.js',
+      '~bootstrap': 'bootstrap',
     },
     extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
   },
   build: {
     chunkSizeWarningLimit: 1600,
+    outDir: 'public',
+    assetsDir: '',
+    manifest: true,
     rollupOptions: {
       output: {
-        manualChunks: undefined, // Add this line
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: (assetInfo) => {
-          let extType = assetInfo.name.split('.').at(1);
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            extType = 'img';
+        chunkFileNames: 'js/[name]-[hash].js',
+        entryFileNames: 'js/[name]-[hash].js',
+        assetFileNames: ({name}) => {
+          if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
+            return 'images/[name]-[hash][extname]';
           }
-          return `assets/${extType}/[name]-[hash][extname]`;
+          if (/\.css$/.test(name ?? '')) {
+            return 'css/[name]-[hash][extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
         },
-      }
-    }
+      },
+    },
   },
 });
