@@ -9,6 +9,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Vite;
 use App\Models\User;
 use App\Models\Calendar;
 use App\Observers\UserObserver;
@@ -42,6 +43,8 @@ class AppServiceProvider extends ServiceProvider {
 
         //format the return data in resource collection
         JsonResource::withoutWrapping();
+
+        Vite::useManifestFilename('manifest.json');
 
         // Model Event Observer
         User::observe(UserObserver::class);

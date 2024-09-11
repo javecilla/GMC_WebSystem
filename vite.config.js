@@ -14,6 +14,7 @@ export default defineConfig({
       ],
       refresh: true,
       publicDirectory: 'public',
+      buildDirectory: 'build', // Changed this line
     }),
     vue({
       template: {
@@ -40,9 +41,28 @@ export default defineConfig({
     extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
   },
   build: {
-    chunkSizeWarningLimit: 1600,
-    outDir: 'public',
+    outDir: 'public/build', // Changed this line
     assetsDir: '',
     manifest: true,
+    chunkSizeWarningLimit: 1000, // Increased from default 500
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'v-calendar'], // Add other large dependencies here
+          // You can add more manual chunks as needed
+        },
+        chunkFileNames: 'js/[name]-[hash].js',
+        entryFileNames: 'js/[name]-[hash].js',
+        assetFileNames: ({name}) => {
+          if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
+            return 'images/[name]-[hash][extname]';
+          }
+          if (/\.css$/.test(name ?? '')) {
+            return 'css/[name]-[hash][extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
+      },
+    },
   },
 });

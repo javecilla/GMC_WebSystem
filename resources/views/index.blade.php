@@ -58,8 +58,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 
   @vite(['resources/css/app.css', 'resources/sass/app.scss', 'resources/js/app.js'])
-  {{-- <link rel="stylesheet" href="/public/wp-content/libs/fontawesome/css/all.min.css"/>
-  <script src="/public/wp-content/libs/fontawesome/js/all.min.js"></script> --}}
+  <link rel="stylesheet" href="/public/wp-content/libs/fontawesome/css/all.min.css"/>
+  <script src="/public/wp-content/libs/fontawesome/js/all.min.js"></script>
 
   {{-- Recaptcha --}}
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
