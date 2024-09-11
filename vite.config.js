@@ -25,7 +25,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/',
+  base: process.env.ASSET_URL ? '/' + process.env.ASSET_URL.replace(/^\/|\/$/g, '') + '/' : '/',
   optimizeDeps: {
     include: ['v-calendar']
   },
