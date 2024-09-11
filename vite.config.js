@@ -25,7 +25,8 @@ export default defineConfig({
       },
     }),
   ],
-  base: process.env.ASSET_URL ? '/' + process.env.ASSET_URL.replace(/^\/|\/$/g, '') + '/' : '/',
+  base: "/",
+  publicDir: process.env.ASSET_URL,
   optimizeDeps: {
     include: ['v-calendar']
   },
@@ -38,6 +39,26 @@ export default defineConfig({
     extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
   },
   build: {
-    chunkSizeWarningLimit: 1600
+    chunkSizeWarningLimit: 1600,
+    rollupOptions: {
+      output: {
+        chunkFileNames: '[name]-[hash].js',
+        entryFileNames: '[name]-[hash].js',
+
+        assetFileNames: ({ name }) => {
+          if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
+            return '[name]-[hash][extname]'
+          }
+
+          if (/\.css$/.test(name ?? '')) {
+            return '[name]-[hash][extname]'
+          }
+
+          // default value
+          // ref: https://rollupjs.org/guide/en/#outputassetfilenames
+          return '[name]-[hash][extname]'
+        }
+      }
+    }
   },
 });
