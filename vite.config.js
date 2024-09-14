@@ -13,8 +13,7 @@ export default defineConfig({
         'resources/css/app.css',
       ],
       refresh: true,
-      publicDirectory: 'public',
-      buildDirectory: 'public/build',
+      buildDirectory: 'build',
     }),
     vue({
       template: {
@@ -44,12 +43,12 @@ export default defineConfig({
   build: {
     outDir: 'public/build', 
     assetsDir: '',
-    manifest: 'manifest.json',
+    manifest: 'manifest.json', //true
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['vue', 'v-calendar'], // Add other large dependencies here
+          vendor: ['vue', 'v-calendar'], // add other large dependencies here
           // add more manual chunks as needed
         },
         chunkFileNames: 'js/[name]-[hash].js',
