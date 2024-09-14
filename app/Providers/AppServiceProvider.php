@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider {
         //format the return data in resource collection
         JsonResource::withoutWrapping();
 
-        Vite::useManifestFilename('build/manifest.json');
+        Vite::useManifestFilename('manifest.json');
 
         // Model Event Observer
         User::observe(UserObserver::class);
