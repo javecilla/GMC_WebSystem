@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
 export default defineConfig({
-  base: '/public/',
+  base: '/',
   plugins: [
     laravel({
       input: [
@@ -14,7 +14,7 @@ export default defineConfig({
       ],
       refresh: true,
       publicDirectory: 'public',
-      buildDirectory: 'build',
+      buildDirectory: 'public/build',
     }),
     vue({
       template: {
@@ -60,6 +60,10 @@ export default defineConfig({
           }
           if (/\.css$/.test(name ?? '')) {
             return 'css/[name]-[hash][extname]';
+          }
+          // Changed to return js files to 'js' directory
+          if (/\.js$/.test(name ?? '')) {
+            return 'js/[name]-[hash][extname]';
           }
           return 'assets/[name]-[hash][extname]';
         },
