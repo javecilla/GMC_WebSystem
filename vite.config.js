@@ -44,7 +44,7 @@ export default defineConfig({
   build: {
     outDir: 'public/build', 
     assetsDir: '',
-    manifest: true,
+    manifest: 'manifest.json',
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
