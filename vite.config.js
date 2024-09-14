@@ -13,6 +13,7 @@ export default defineConfig({
         'resources/css/app.css',
       ],
       refresh: true,
+      publicDirectory: 'public',
       buildDirectory: 'build',
     }),
     vue({
@@ -20,7 +21,10 @@ export default defineConfig({
         transformAssetUrls: {
           base: null,
           includeAbsolute: false,
-        }
+        },
+        compilerOptions: {
+          isCustomElement: (tag) => tag.includes('-')
+        },
       },
     }),
   ],
@@ -40,16 +44,7 @@ export default defineConfig({
   build: {
     outDir: 'public/build', 
     assetsDir: '',
-    manifest: true, //true 'manifest.json'
-    chunkSizeWarningLimit: 1000,
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
-        },
-      },
-    },
+    manifest: 'manifest.json',
+    chunkSizeWarningLimit: 1000
   },
 });
