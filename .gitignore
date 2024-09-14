@@ -7,6 +7,8 @@
 /public/css/
 /public/images/
 /public/js/
+/public/build/*
+!/public/build/manifest.json
 /storage/*.key
 /vendor
 /docker
