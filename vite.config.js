@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
 export default defineConfig({
-  base: '/',
+  base: '/public/build/',
   plugins: [
     laravel({
       input: [
@@ -44,7 +44,19 @@ export default defineConfig({
   build: {
     outDir: 'public/build', 
     assetsDir: '',
-    manifest: 'manifest.json',
-    chunkSizeWarningLimit: 1000
+    manifest: true,
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        entryFileNames: 'js/[name]-[hash].js',
+        chunkFileNames: 'js/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name.endsWith('.css')) {
+            return 'css/[name]-[hash][extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
+      },
+    },
   },
 });
