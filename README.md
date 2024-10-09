@@ -1,4 +1,4 @@
-![Logo](https://goldenminds.edu.ph/public/wp-content/uploads/ref002.png)
+![Logo](https://static.goldenmindsbulacan.com/assets/images/gmc/ref002.png)
 
 
 # About
